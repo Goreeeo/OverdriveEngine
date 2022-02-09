@@ -33,7 +33,11 @@ namespace OverdriveEngine
         private const int SW_SHOWMINIMIZED = 2;
         private const int SW_SHOW = 5;
 
-        private Vector2Int ScreenSize = new Vector2Int(512, 512);
+        private Vector2Int screenSize = new Vector2Int(512, 512);
+        /// <summary>
+        /// The size of the screen.
+        /// </summary>
+        public Vector2Int ScreenSize { get { return screenSize; } private set { screenSize = value; } }
         private string Title = "Game";
         private Canvas Window = null;
 

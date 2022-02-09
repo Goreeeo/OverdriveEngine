@@ -8,13 +8,11 @@ namespace OverdriveEngine.Demos
     {
         private LevelMap Tilemap;
 
-        private Object2D Player;
-
-        private Vector2 lastPos = new Vector2();
-
-        private float speed = 5f;
+        private Player Player;
 
         private AudioPlayer music;
+
+        public bool trigger1;
 
         public DemoGame() : base(new Vector2Int(615, 515), "Demo Game")
         {
@@ -34,7 +32,7 @@ namespace OverdriveEngine.Demos
 
             WaitForPlayer();
 
-            Player = Tilemap.Player;
+            Player = new Player((Sprite2D)Tilemap.Player, this);
         }
 
         private void WaitForPlayer()
@@ -47,21 +45,11 @@ namespace OverdriveEngine.Demos
 
         public override void Update()
         {
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
+            Player.Update();
 
-            Player.Transform.Position.X += horizontal * speed;
-            Player.Transform.Position.Y += vertical * speed;
+            if (Player.TilePlayer.IsColliding("Trigger1") != null)
+            {
 
-            if (Player.IsColliding("Ground") != null)
-            {
-                Player.Transform.Position.X = lastPos.X;
-                Player.Transform.Position.Y = lastPos.Y;
-            }
-            else
-            {
-                lastPos.X = Player.Transform.Position.X;
-                lastPos.Y = Player.Transform.Position.Y;
             }
         }
 
